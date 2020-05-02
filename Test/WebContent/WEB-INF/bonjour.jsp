@@ -5,10 +5,8 @@
         <title>Test</title>
     </head>
     <body>
-    <%@ include file="menu.jsp" %>
-     <p><c:out value="Bonjour "/>
-         ${auteur.prenom} ${auteur.nom}
-     </p> 
-     <p>${ auteur.actif ? 'Vous etes tres actif !' : 'Vous etes inactif !'}</p>  
+        <%@ include file="menu.jsp" %>
+        <p>Bonjour <c:out value="${auteur.nom} " /> <c:out value="${auteur.prenom}"/></p>
+        <%@ include file="formulaire.jsp" %>
     </body>
 </html>

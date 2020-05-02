@@ -30,12 +30,16 @@ public class Test extends HttpServlet {
 		
 		request.setAttribute("auteur", auteur);
 		
-		this.getServletContext().getRequestDispatcher("/WEB-INF/bonjour.jsp").forward(request, response);
+		this.getServletContext().getRequestDispatcher("/WEB-INF/bonjour.jsp").forward(request,response);
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String nom = request.getParameter("nom");
 		
+		request.setAttribute("nom", nom);
+		this.getServletContext().getRequestDispatcher("/WEB-INF/bonjour.jsp").forward(request,response);
+
 	}
 
 }
