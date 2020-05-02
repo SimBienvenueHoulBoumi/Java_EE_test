@@ -1,21 +1,16 @@
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Formulaire</title>
-    </head>
-    <body> 
-    
-        <c:if test="${ !empty nom }">
-            <p><c:out value="Bonjour vous vous appelez ${ nom }" /></p>
+
+        <c:if test="${ !empty fichier }">
+            <p><c:out value="Le fichier ${ fichier } (${ description }) a été uploadé !" /></p>
         </c:if>
-    
-        <form action="bonjour" method="post">
+    <form method="post" action="bonjour" enctype="multipart/form-data">
         <p>
-            <label for="nom">Votre pseudo :</label>
-            <input type="text" name="nom" id="nom"/><br/>
-            
-            <input type="submit" />
+            <label for="description">Description du fichier : </label>
+            <input type="text" name="description" id="description" />
         </p>
-        </form>
-    </body>
-</html>
+        <p>
+            <label for="fichier">Fichier à envoyer : </label>
+            <input type="file" name="fichier" id="fichier" />
+        </p>
+        
+        <input type="submit" />
+    </form>
