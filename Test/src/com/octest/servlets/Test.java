@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.octest.bdd.Noms;
 import com.octest.beans.Utilisateur;
-
+import com.octest.dao.DaoFactory;
+import com.octest.dao.UtilisateurDao;
 
 /**
  * Servlet implementation class Test
@@ -18,16 +18,15 @@ import com.octest.beans.Utilisateur;
 @WebServlet("/Test")
 public class Test extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    
-       
-    public Test() {
-        super();
-        // TODO Auto-generated constructor stub
+    private UtilisateurDao utilisateurDao;
+
+    public void init() throws ServletException {
+        DaoFactory daoFactory = DaoFactory.getInstance();
+        this.utilisateurDao = daoFactory.getUtilisateurDao();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Noms tableNoms = new Noms();
-        request.setAttribute("utilisateurs", tableNoms.recupererUtilisateurs());
+        request.setAttribute("utilisateurs", utilisateurDao.lister());
         this.getServletContext().getRequestDispatcher("/WEB-INF/bonjour.jsp").forward(request, response);
     }
 
@@ -36,10 +35,9 @@ public class Test extends HttpServlet {
         utilisateur.setNom(request.getParameter("nom"));
         utilisateur.setPrenom(request.getParameter("prenom"));
         
-        Noms tableNoms = new Noms();
-        tableNoms.ajouterUtilisateur(utilisateur);
+        utilisateurDao.ajouter(utilisateur);
         
-        request.setAttribute("utilisateurs", tableNoms.recupererUtilisateurs());
+        request.setAttribute("utilisateurs", utilisateurDao.lister());
         
         this.getServletContext().getRequestDispatcher("/WEB-INF/bonjour.jsp").forward(request, response);
     }
