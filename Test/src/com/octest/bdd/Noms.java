@@ -9,12 +9,13 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.octest.beans.BeanException;
 import com.octest.beans.Utilisateur;
 
 public class Noms {
     private Connection connexion;
     
-    public List<Utilisateur> recupererUtilisateurs() {
+    public List<Utilisateur> recupererUtilisateurs() throws BeanException {
         List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
         Statement statement = null;
         ResultSet resultat = null;
